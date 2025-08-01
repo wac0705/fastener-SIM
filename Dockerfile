@@ -1,18 +1,9 @@
 FROM python:3.11-slim
 
-# 安裝系統依賴與 gmsh（ElmerFEM 用官網包）
+# 安裝系統依賴與 gmsh
 RUN apt-get update && \
     apt-get install -y wget bzip2 gmsh && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# 安裝 ElmerFEM 8.5.0 官方二進位
-ENV ELMER_DIR /opt/elmerfem
-RUN wget -O /tmp/ElmerFEM.tar.bz2 https://github.com/ElmerCSC/elmerfem/releases/download/release-8.5.0/ElmerFEM-8.5.0-linux-x86_64-binaries.tar.bz2 && \
-    mkdir -p $ELMER_DIR && \
-    tar -xjf /tmp/ElmerFEM.tar.bz2 -C $ELMER_DIR --strip-components=1 && \
-    rm /tmp/ElmerFEM.tar.bz2
-ENV PATH $ELMER_DIR/bin:$PATH
-ENV LD_LIBRARY_PATH $ELMER_DIR/lib:$LD_LIBRARY_PATH
 
 # 安裝 Miniconda
 ENV CONDA_DIR /opt/conda
