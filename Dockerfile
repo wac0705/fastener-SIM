@@ -32,4 +32,5 @@ RUN pip install fastapi uvicorn
 
 EXPOSE 3000
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "3000"]
+# 關鍵修正：啟動 API 要用 conda run 保證在 py312 環境
+CMD ["conda", "run", "-n", "py312", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "3000"]
