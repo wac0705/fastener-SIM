@@ -11,8 +11,9 @@ ENV PATH $CONDA_DIR/bin:$PATH
 RUN conda config --set always_yes yes && \
     conda config --set channel_priority strict
 
-# 這行會自動同意 channel 條款
-RUN conda info
+# 核心修正：主動接受 channel 條款！
+RUN conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main && \
+    conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
 
 RUN conda install -y -c conda-forge elmerfem gmsh sfepy matplotlib python-multipart numpy
 
