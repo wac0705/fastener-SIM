@@ -1,10 +1,20 @@
 from fastapi import FastAPI, Form
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pycalculix import *
 import matplotlib.pyplot as plt
 import os
 
 app = FastAPI()
+
+# 加入 CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 可改成你的前端網域，現階段先全開
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/run-fea/")
 def run_fea(
