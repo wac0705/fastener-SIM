@@ -1,6 +1,10 @@
-numpy>=1.26.0
 fastapi
 uvicorn
-pycalculix
+sfepy
 matplotlib
 python-multipart
+gmsh
+h5py
+numpy>=2.0.0
+# 下面這行只有你有特殊自訂分析流程才要加
+# pyelmer # 如果要 Python 讀寫 Elmer HDF5 結果
